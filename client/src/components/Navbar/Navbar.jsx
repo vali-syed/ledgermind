@@ -1,34 +1,41 @@
-import {Link} from 'react-router-dom';
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Menu } from 'lucide-react'
 
-<nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-b border-default">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <Link to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-        <span class="self-center text-xl text-heading font-semibold whitespace-nowrap">Ledgermind</span>
-    </Link>
-    <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <Link to='/login'>
-            <button type="button" class="text-white bg-brand hover:bg-brand-strong box-border border border-transparent focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none">Lauch App</button>
+function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  return (
+    <nav className="w-full border-b border-white/10 bg-slate-950 text-white">
+      <div className="relative mx-auto flex min-h-16 max-w-6xl items-center gap-6 px-4 md:px-6">
+        <Link to="/" className="text-xl font-bold text-white">
+          Ledgermind
         </Link>
-        <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary" aria-controls="navbar-sticky" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/></svg>
-        </button>
-    </div>
-    <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-      <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-default rounded-base bg-neutral-secondary-soft md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-neutral-primary">
-        <li>
-          <Link to="#" class="block py-2 px-3 text-white bg-brand rounded-sm md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</Link>
-        </li>
-        <li>
-          <Link to="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Features</Link>
-        </li>
-         <li>
-          <Link to="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">How it Works</Link>
-        </li>
-         <li>
-          <Link to="#" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">FAQ</Link>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+
+        <ul className={`${menuOpen ? 'flex' : 'hidden'} absolute top-full left-0 w-full flex-col gap-1 border-b border-white/10 bg-slate-950 px-4 py-3 md:static md:flex md:w-auto md:flex-row md:gap-6 md:border-0 md:p-0`}>
+          <li><a href="#home" className="block py-2 text-sm text-slate-300 hover:text-blue-400">Home</a></li>
+          <li><a href="#features" className="block py-2 text-sm text-slate-300 hover:text-blue-400">Features</a></li>
+          <li><a href="#how-it-works" className="block py-2 text-sm text-slate-300 hover:text-blue-400">How it Works</a></li>
+          <li><a href="#faq" className="block py-2 text-sm text-slate-300 hover:text-blue-400">FAQ</a></li>
+        </ul>
+
+        <div className="ml-auto flex items-center gap-3">
+          <Link to="/login" className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700">
+            Launch App
+          </Link>
+          <button
+            type="button"
+            className="rounded p-2 text-2xl text-slate-200 hover:bg-white/10 md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close main menu' : 'Open main menu'}
+            aria-expanded={menuOpen}
+          >
+            <Menu size={24} aria-hidden="true" />
+          </button>
+        </div>
+      </div>
+    </nav>
+  )
+}
+
+export default Navbar
