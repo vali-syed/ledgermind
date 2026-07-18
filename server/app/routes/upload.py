@@ -5,6 +5,7 @@ from app.services.pdf_service import extract_text
 from app.services.chunk_service import chunk_text
 from app.services.embedding_service import generate_embeddings
 from app.services.pinecone_service import store_embeddings
+from app.services.retriver_service import retrieve_chunks
 
 UPLOAD_FOLDER = 'app/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok = True)
@@ -33,3 +34,11 @@ async def upload_file(file: UploadFile = File(...)):
         "filename": file.filename,
         "content_type": file.content_type,
     }
+
+
+@router.get("/test")
+def test():
+
+    return retrieve_chunks(
+        "Can I hire another employee?"
+    )
