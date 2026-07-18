@@ -13,4 +13,3 @@ client = MongoClient(MONGO_DB_URI)
 db = client[DATABASE_NAME]
 
 users_collection = db["users"]
-print(MONGO_DB_URI)
