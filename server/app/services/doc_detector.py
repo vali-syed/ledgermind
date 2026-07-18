@@ -3,8 +3,11 @@ def detect_document_type(text: str):
     text = text.lower()
 
     if (
-        "balance" in text
-        and "withdrawal" in text
+        "state bank of india" in text #iam using state bank of india as an example for bank statement detection so i mentioned it here wantedly.
+        or (
+            "account statement" in text
+            and "balance" in text
+        )
     ):
         return "bank_statement"
 

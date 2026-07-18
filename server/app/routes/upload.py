@@ -2,6 +2,7 @@ import os
 from fastapi import APIRouter, UploadFile, File
 from app.services.pdf_service import extract_text
 from app.services.chunk_service import chunk_text
+from app.services.embedding_service import generate_embeddings
 
 UPLOAD_FOLDER = 'app/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok = True)
@@ -21,9 +22,10 @@ async def upload_file(file: UploadFile = File(...)):
 
     text = extract_text(file_path)
     chunks = chunk_text(text)
+    embedded_chunks = generate_embeddings(chunks)
 
     return {
-        "example_chunks": chunks,
+        "em_chunks": embedded_chunks,
         "content_type": file.content_type,
         "path": file_path   
     }

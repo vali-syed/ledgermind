@@ -64,9 +64,10 @@ def bank_statement_chunk(text):
 
         if transaction_count >= 10:
 
-            chunks.append(
-                "\n".join(current_chunk)
-            )
+            chunks.append({
+                "chunk_id": len(chunks),
+                "text": "\n".join(current_chunk)
+            })
 
             current_chunk = []
 
@@ -74,9 +75,10 @@ def bank_statement_chunk(text):
 
     if current_chunk:
 
-        chunks.append(
-            "\n".join(current_chunk)
-        )
+        chunks.append({
+            "chunk_id": len(chunks),
+            "text": "\n".join(current_chunk)
+        })
 
     return chunks
 
@@ -86,7 +88,7 @@ def chunk_text(text):
     document_type = detect_document_type(text)
 
     if document_type == "bank_statement":
-
+        print("Detected document type: Bank Statement")
         return bank_statement_chunk(text)
-
+    print("detected document type: Generic Document")
     return paragraph_chunk(text)
