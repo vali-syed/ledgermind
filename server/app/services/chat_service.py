@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 from app.services.retriver_service import retrieve_chunks
-
+from app.services.question_detector import is_financial_question
 load_dotenv()
 
 client = OpenAI(api_key = os.getenv('OPENAI_API_KEY'))
@@ -43,6 +43,12 @@ You are permitted to assist the user with the following financial tasks based on
 """
 def generate_chat_response(question: str):
 
+    if not is_financial_question(question):
+        return{
+            "answer" : "I am LedgerMind, an AI CFO. I can only assist with financial analysis and insights based strictly on your uploaded business documents.",
+            "sources": []
+        }
+
     retrieved_chunks = retrieve_chunks(question)
 
     context = ""
@@ -62,7 +68,7 @@ User Question:
 
 Answer using ONLY the retrieved context.
 If the answer cannot be determined, clearly say that there is insufficient information, 
-if its general query please remind him your not general ai chatbot.
+If its general query please strictly return iam not a general ai chat bot to the user.
 """
 
     response = client.chat.completions.create(
