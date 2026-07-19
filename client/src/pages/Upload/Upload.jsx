@@ -1,6 +1,7 @@
 import { CheckCircle2, FileText, LockKeyhole, ShieldCheck, UploadCloud } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useUploadStore from '../../store/uploadStore'
 
 const progressMessages = [
   'Uploading document...',
@@ -19,6 +20,7 @@ function Upload() {
   const [isSuccess, setIsSuccess] = useState(false)
   const fileInputRef = useRef(null)
   const navigate = useNavigate()
+  const setUploadData = useUploadStore((state) => state.setUploadData)
 
   const selectFile = (file) => {
     setError('')
@@ -71,6 +73,7 @@ function Upload() {
         return
       }
 
+      setUploadData(data)
       setProgressStep(progressMessages.length - 1)
       setIsSuccess(true)
       setTimeout(() => navigate('/dashboard'), 1800)
@@ -128,8 +131,6 @@ function Upload() {
 
           {selectedFile && <p className="mt-4 flex items-center gap-2 text-sm text-slate-300"><CheckCircle2 size={17} className="text-blue-400" /> {selectedFile.name}</p>}
           {error && <p className="mt-4 text-sm text-red-400">{error}</p>}
-
-          {isUploading && <div className="mt-5 rounded-lg border border-blue-400/20 bg-blue-500/10 px-4 py-3 text-sm text-blue-200">{progressMessages[progressStep]}</div>}
 
           {isSuccess ? (
             <div className="mt-5 rounded-lg border border-blue-400/30 bg-blue-500/10 p-4 text-center">
