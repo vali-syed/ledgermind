@@ -6,6 +6,7 @@ import Login from './pages/Login/Login'
 import Signup from './pages/Signup/Signup'
 import Upload from './pages/Upload/Upload'
 import Dashboard from './pages/Dashboard/Dashboard'
+import Chat from './pages/Chat/Chat'
 import './App.css'
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/dashboard" element={<Dashboard />}/>
+      <Route path = "/chat" element = {<Chat />} />
     </Routes>
   )
 }
