@@ -2,8 +2,6 @@
 
 LedgerMind is an AI-powered CFO assistant for micro, small, and medium-sized businesses (MSMEs). It analyzes uploaded bank statements, generates financial insights, and answers business finance questions using Retrieval-Augmented Generation (RAG).
 
-LedgerMind is a hackathon MVP focused on turning financial documents into practical, understandable business guidance.
-
 ## Features
 
 - User registration and login
@@ -177,8 +175,4 @@ The upload endpoint accepts a multipart form field named `file`. The chat endpoi
 
 ## Contributors
 
-LedgerMind Hackathon Team
-
-## License
-
-This project is licensed under the MIT License.
+Syed Vali
