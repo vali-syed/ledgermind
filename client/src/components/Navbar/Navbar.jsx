@@ -16,7 +16,6 @@ function Navbar() {
           <li><a href="#home" className="block py-2 text-sm text-slate-300 hover:text-blue-400">Home</a></li>
           <li><a href="#features" className="block py-2 text-sm text-slate-300 hover:text-blue-400">Features</a></li>
           <li><a href="#how-it-works" className="block py-2 text-sm text-slate-300 hover:text-blue-400">How it Works</a></li>
-          <li><a href="#faq" className="block py-2 text-sm text-slate-300 hover:text-blue-400">FAQ</a></li>
         </ul>
 
         <div className="ml-auto flex items-center gap-3">

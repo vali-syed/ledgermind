@@ -139,7 +139,7 @@ function LandingSections() {
             <a href="#how-it-works" className="hover:text-blue-400">How It Works</a>
             <a href="#why-ledgermind" className="hover:text-blue-400">Why LedgerMind</a>
           </div>
-          <p>© 2026 LedgerMind. All rights reserved.</p>
+          <p>2026 LedgerMind. All rights reserved.</p>
         </div>
       </footer>
     </div>
