@@ -1,4 +1,4 @@
-import { ArrowRight, Bot, Check, CirclePlay, Sparkles, TrendingUp } from 'lucide-react'
+import { ArrowRight, Bot, Check, Sparkles, TrendingUp } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function StatCard({ title, amount, change, color }) {
@@ -13,7 +13,7 @@ function StatCard({ title, amount, change, color }) {
 
 function Hero() {
   return (
-    <main id="home" className="overflow-hidden bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white">
+    <main className="overflow-hidden bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 text-white">
       <section className="mx-auto grid min-h-[calc(100vh-64px)] max-w-6xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-20">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm text-blue-200">
@@ -33,9 +33,6 @@ function Hero() {
             <Link to="/login" className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-5 py-3 font-medium text-white shadow-lg shadow-blue-500/25 transition hover:-translate-y-0.5 hover:from-blue-400 hover:to-blue-600">
               Launch App <ArrowRight size={18} />
             </Link>
-            <a href="#demo" className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-600 bg-white/5 px-5 py-3 font-medium text-slate-100 transition hover:border-slate-400 hover:bg-white/10">
-              <CirclePlay size={18} /> Watch Demo
-            </a>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-300">

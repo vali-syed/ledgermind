@@ -18,7 +18,7 @@ function Signup() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('http://localhost:8000/auth/register', {
+      const response = await fetch('https://ledgermind-rjql.onrender.com/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: fullName, email, password }),
@@ -49,7 +49,7 @@ function Signup() {
           <p className="mt-2 text-sm leading-6 text-slate-400">Start using AI to understand your business finances.</p>
         </div>
 
-        <form className="mt-4 space-y-5" onSubmit={handleSubmit}>
+      <form className="mt-4 space-y-5" onSubmit={handleSubmit}>
     
         <div className="flex items-center rounded-lg border border-white/10 bg-slate-950 px-3 focus-within:border-blue-500">
           <User size={18} className="text-slate-500" />
@@ -82,7 +82,7 @@ function Signup() {
         <button type="submit" disabled={isLoading} className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-3 mb-2 font-medium text-white transition hover:from-blue-400 hover:to-blue-600">
           {isLoading ? 'Creating Account...' : 'Create Account'}
           </button>
-        </form>
+      </form>
 
         <p className="mt-7 text-center text-sm text-slate-400">
           Already have an account? <Link to="/login" className="font-medium text-blue-400 transition hover:text-blue-300">Login</Link>

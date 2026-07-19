@@ -62,7 +62,7 @@ function Upload() {
     }, 1200)
 
     try {
-      const response = await fetch('http://localhost:8000/upload/upload_files', {
+      const response = await fetch('https://ledgermind-rjql.onrender.com/upload/upload_files', {
         method: 'POST',
         body: formData,
       })
