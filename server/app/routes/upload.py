@@ -6,6 +6,7 @@ from app.services.chunk_service import chunk_text
 from app.services.embedding_service import generate_embeddings
 from app.services.pinecone_service import store_embeddings
 from app.services.retriver_service import retrieve_chunks
+from app.services.chat_service import generate_chat_response
 
 UPLOAD_FOLDER = 'app/uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok = True)
@@ -35,10 +36,8 @@ async def upload_file(file: UploadFile = File(...)):
         "content_type": file.content_type,
     }
 
-
+## just testing the retriver
 @router.get("/test")
 def test():
-
-    return retrieve_chunks(
-        "Can I hire another employee?"
-    )
+    response = generate_chat_response("please tell today soccer fifa world cup match detials?")
+    return response["answer"]

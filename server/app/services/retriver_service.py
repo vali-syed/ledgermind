@@ -36,4 +36,4 @@ def retrieve_chunks(query):
             "text": match.metadata["text"]
         })
 
-    return chunks
+    return chunks   
