@@ -1,11 +1,42 @@
 import { Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setError('')
+    setIsLoading(true)
+
+    try {
+      const response = await fetch('http://localhost:8000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      })
+      const data = await response.json()
+
+      if (!response.ok || !data.access_token) {
+        setError(data.message || data.detail?.[0]?.msg || 'Login failed')
+        return
+      }
+
+      Cookies.set('jwt_token', data.access_token)
+      navigate('/upload')
+    } catch {
+      setError('Unable to connect to the server')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-slate-950 to-slate-900 px-4 py-10 text-white">
@@ -18,7 +49,7 @@ function Login() {
           <p className="mt-3 text-sm leading-6 text-slate-400">Sign in to continue managing your business with AI.</p>
         </div>
 
-        <form className="mt-8 space-y-5" onSubmit={(event) => event.preventDefault()}>
+        <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
             <div className="flex items-center rounded-lg border border-white/10 bg-slate-950 px-3 focus-within:border-blue-500">
                 <Mail size={18} className="text-slate-500" />
                 <input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter your Email" className="w-full bg-transparent px-3 py-3 text-sm text-white outline-none placeholder:text-slate-500" />
@@ -34,8 +65,10 @@ function Login() {
             </div>
             
 
-            <button type="submit" className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-3 font-medium text-white transition hover:from-blue-400 hover:to-blue-600">
-                Login
+            {error && <p className="text-sm text-red-400">{error}</p>}
+
+            <button type="submit" disabled={isLoading} className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 px-4 py-3 font-medium text-white transition hover:from-blue-400 hover:to-blue-600">
+                {isLoading ? 'Logging in...' : 'Login'}
             </button>
         </form>
 
